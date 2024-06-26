@@ -52,20 +52,23 @@ int drawPixel(int x, int y, int isWhite) {
 }
 
 int drawPixels(BYTE arr[32][64]) {
-    //SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);   // Set the drawing color to white
     //SDL_RenderClear(ren); // "cleans" the screen with color
-    SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);   // Set the drawing color to black
+    
     SDL_Rect rect;
     int rows = 32;
     int cols = 64;
     for (int r = 0; r < rows; r++) {
         for (int c = 0; c < cols; c++) {
+            SDL_Rect rect;
+            rect.x = 10*c;
+            rect.y = 10*r;
+            rect.w = 10;
+            rect.h = 10;
            if (arr[r][c]) { // if not null?
-                SDL_Rect rect;
-                rect.x = 10*c;
-                rect.y = 10*r;
-                rect.w = 10;
-                rect.h = 10;
+                SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);   // Set the drawing color to white
+                SDL_RenderFillRect(ren, &rect);
+           } else { // draw opposite color?
+                SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);   // Set the drawing color to black
                 SDL_RenderFillRect(ren, &rect);
            }
         }
